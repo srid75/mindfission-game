@@ -265,11 +265,11 @@ function App() {
 
   return (
     <div className="App">
+      {gameState.showConfetti && <Confetti />}
       <main>
         {renderProgressBars()}
         {renderGameContent()}
       </main>
-      {gameState.showConfetti && <Confetti />}
       <footer className="app-footer">
         Powered by Workfission
       </footer>
