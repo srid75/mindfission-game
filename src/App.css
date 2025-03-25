@@ -1,0 +1,82 @@
+
+.app {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom right, #fce3ec, #fff6d1);
+  min-height: 100vh;
+}
+
+.employer-line {
+  position: relative;
+  height: 60px;
+  margin-bottom: 40px;
+}
+
+.employer {
+  font-size: 2.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.stations {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 30px;
+  padding: 0 20px;
+  color: #444;
+}
+
+.step-box {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: auto;
+}
+
+.choices {
+  margin-top: 20px;
+}
+
+.choice {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.choice.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.next-btn {
+  margin-top: 30px;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 999px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+.reveal {
+  font-size: 1.8rem;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.footer-message {
+  margin-top: 40px;
+  font-size: 1.2rem;
+  color: #007b5e;
+}
