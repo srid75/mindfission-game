@@ -1,82 +1,299 @@
-
-.app {
-  font-family: 'Arial', sans-serif;
+.App {
   text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(to bottom right, #fce3ec, #fff6d1);
   min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.employer-line {
-  position: relative;
-  height: 60px;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
   margin-bottom: 40px;
 }
 
-.employer {
-  font-size: 2.5rem;
+.App-header h1 {
+  color: #2c3e50;
+  font-size: 2.5em;
+  margin: 0;
+  padding: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+main {
+  width: 100%;
+  max-width: 800px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.progress-container {
+  margin-bottom: 30px;
+}
+
+.employee-track {
+  position: relative;
+  height: 70px;
+  background: rgba(240, 242, 245, 0.8);
+  border-radius: 35px;
+  margin-bottom: 35px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.employee-emoji {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.2em;
+  transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .stations {
   display: flex;
   justify-content: space-between;
-  font-weight: bold;
-  margin-top: 30px;
-  padding: 0 20px;
-  color: #444;
+  padding: 0 40px;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  box-sizing: border-box;
 }
 
-.step-box {
-  background: white;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  max-width: 600px;
-  margin: auto;
+.stations span {
+  font-size: 1.3em;
+  color: #2c3e50;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.choices {
-  margin-top: 20px;
+.employer-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-.choice {
-  margin: 0 10px;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  border-radius: 8px;
+.progress-bar {
+  background: rgba(240, 242, 245, 0.8);
+  height: 28px;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: #2c3e50;
+  font-size: 1em;
+  font-weight: 600;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00c6fb 0%, #005bea 100%);
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.game-content {
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  margin-top: 25px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.game-content p {
+  font-size: 1.4em;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  white-space: pre-line;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+  padding: 0 10px;
+}
+
+button {
+  padding: 14px 28px;
+  font-size: 1.1em;
   border: none;
-  background-color: #f0f0f0;
-  cursor: pointer;
-}
-
-.choice.selected {
-  background-color: #007bff;
-  color: white;
-}
-
-.next-btn {
-  margin-top: 30px;
-  padding: 12px 30px;
-  font-size: 1rem;
-  border-radius: 999px;
-  border: none;
-  background-color: #28a745;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
   color: white;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.reveal {
-  font-size: 1.8rem;
-  margin-top: 20px;
-  font-weight: bold;
-  color: #333;
+button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
-.footer-message {
-  margin-top: 40px;
-  font-size: 1.2rem;
-  color: #007b5e;
+button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+button.selected {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  transform: scale(1.02);
+}
+
+.next-button {
+  margin-top: 25px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  font-size: 1.2em;
+  padding: 16px 32px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.next-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+.game-complete {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.game-complete h2 {
+  color: #10b981;
+  font-size: 2.2em;
+  margin-bottom: 25px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.game-complete p {
+  color: #2c3e50;
+  font-size: 1.3em;
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+@keyframes confetti {
+  0% { transform: translateY(0) rotate(0); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+.confetti {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: #f39c12;
+  animation: confetti 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+
+  main {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .employee-track {
+    height: 60px;
+    margin-bottom: 25px;
+  }
+
+  .stations span {
+    font-size: 1.1em;
+  }
+
+  .employee-emoji {
+    font-size: 1.8em;
+  }
+
+  .game-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+
+  .options {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  button {
+    padding: 12px 24px;
+    font-size: 1em;
+  }
+
+  .next-button {
+    padding: 14px 28px;
+    font-size: 1.1em;
+  }
+
+  .game-complete h2 {
+    font-size: 1.8em;
+  }
+
+  .game-complete p {
+    font-size: 1.1em;
+  }
+}
+
+/* Add smooth scrolling for iOS devices */
+@supports (-webkit-overflow-scrolling: touch) {
+  .App {
+    -webkit-overflow-scrolling: touch;
+  }
 }
