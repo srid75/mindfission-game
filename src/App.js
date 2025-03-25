@@ -1,14 +1,66 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import './App.css';
 import Confetti from './components/Confetti';
 
 function App() {
   // Function to generate 3 random unique even numbers between 2 and 20
   const generateRandomEvenNumbers = useCallback(() => {
-    const allEvenNumbers = Array.from({ length: 10 }, (_, i) => (i + 1) * 2); // [2,4,6,...,20]
+    const allEvenNumbers = Array.from({ length: 10 }, (_, i) => (i + 1) * 2);
     const shuffled = allEvenNumbers.sort(() => Math.random() - 0.5);
     return shuffled.slice(0, 3);
   }, []);
+
+  const [userInteracted, setUserInteracted] = useState(false);
+  const audioRef = useRef(null);
+
+  // Initialize audio
+  useEffect(() => {
+    const audioElement = document.createElement('audio');
+    audioElement.id = 'gameAudio';
+    audioElement.src = 'https://srid75.github.io/mindfission-game/celebration.mp3';
+    audioElement.preload = 'auto';
+    document.body.appendChild(audioElement);
+    audioRef.current = audioElement;
+
+    const enableAudio = () => {
+      setUserInteracted(true);
+      console.log('Enabling audio...');
+      audioElement.load();
+    };
+
+    // Handle user interactions
+    const interactions = ['click', 'touchstart', 'keydown'];
+    interactions.forEach(event => {
+      document.addEventListener(event, enableAudio, { once: true });
+    });
+
+    return () => {
+      interactions.forEach(event => {
+        document.removeEventListener(event, enableAudio);
+      });
+      if (audioElement && audioElement.parentNode) {
+        audioElement.parentNode.removeChild(audioElement);
+      }
+      audioRef.current = null;
+    };
+  }, []);
+
+  const playSuccessSound = useCallback(() => {
+    if (!audioRef.current || !userInteracted) {
+      console.log('Cannot play: audio not ready or user has not interacted');
+      return;
+    }
+    
+    try {
+      audioRef.current.currentTime = 0;
+      audioRef.current.volume = 1.0;
+      audioRef.current.play().catch(error => {
+        console.log('Success sound failed:', error);
+      });
+    } catch (e) {
+      console.log('Success sound error:', e);
+    }
+  }, [userInteracted]);
 
   const [gameState, setGameState] = useState({
     step: 0,
@@ -20,10 +72,26 @@ function App() {
     payrollProgress: 0,
     gameComplete: false,
     showConfetti: false,
-    evenOptions: generateRandomEvenNumbers() // Store the random numbers in state
+    evenOptions: generateRandomEvenNumbers()
   });
 
-  const [audio] = useState(new Audio('/celebration.mp3'));
+  // Add user interaction tracking
+  useEffect(() => {
+    const markUserInteraction = () => {
+      document.documentElement.setAttribute('data-user-interacted', 'true');
+    };
+
+    // Add listeners for common user interactions
+    document.addEventListener('click', markUserInteraction);
+    document.addEventListener('keydown', markUserInteraction);
+    document.addEventListener('touchstart', markUserInteraction);
+
+    return () => {
+      document.removeEventListener('click', markUserInteraction);
+      document.removeEventListener('keydown', markUserInteraction);
+      document.removeEventListener('touchstart', markUserInteraction);
+    };
+  }, []);
 
   const steps = [
     {
@@ -39,8 +107,8 @@ function App() {
       buttonText: "Next"
     },
     {
-      instruction: "Now add one of these even numbers:",
-      options: gameState.evenOptions, // Use the stored random numbers
+      instruction: "Now add one of these numbers:",
+      options: gameState.evenOptions,
       buttonText: "Next"
     },
     {
@@ -52,7 +120,7 @@ function App() {
       buttonText: "Next"
     },
     {
-      instruction: "Do you know what Workfission is?",
+      instruction: "Before revealing the answer, do you know what Workfission is?",
       options: [
         "Smart Scheduling",
         "Smart Hiring",
@@ -89,7 +157,9 @@ function App() {
           payrollProgress: 100
         }));
         
-        audio.play().catch(error => console.log("Audio playback failed:", error));
+        // Play success sound
+        console.log('Game complete, playing sound...');
+        playSuccessSound();
       }
     } else {
       setGameState(prev => ({
