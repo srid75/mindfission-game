@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/mindfission-game/static/css/main.3a2b0782.css",
-    "main.js": "/mindfission-game/static/js/main.632c33e5.js",
+    "main.js": "/mindfission-game/static/js/main.d8dd9271.js",
     "static/js/453.f381c990.chunk.js": "/mindfission-game/static/js/453.f381c990.chunk.js",
     "index.html": "/mindfission-game/index.html",
     "main.3a2b0782.css.map": "/mindfission-game/static/css/main.3a2b0782.css.map",
-    "main.632c33e5.js.map": "/mindfission-game/static/js/main.632c33e5.js.map",
+    "main.d8dd9271.js.map": "/mindfission-game/static/js/main.d8dd9271.js.map",
     "453.f381c990.chunk.js.map": "/mindfission-game/static/js/453.f381c990.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3a2b0782.css",
-    "static/js/main.632c33e5.js"
+    "static/js/main.d8dd9271.js"
   ]
 }
