@@ -1,10 +1,11 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import useSound from 'use-sound';
 import confetti from 'canvas-confetti';
-import celebrationSfx from './celebration.mp3';
 import './App.css';
+
+// ✅ Define after imports
+const celebrationSfx = '/celebration.mp3';
 
 const steps = [
   "Think of any number (don't tell me).",
@@ -25,12 +26,14 @@ function App() {
 
   const handleNext = () => {
     if (step === 2 && evenAdd === null) return;
-    if (step === 4 && evenAdd) {
+
+    if (step === 4 && evenAdd !== null) {
       const result = evenAdd / 2;
       setFinalNumber(result);
       playCelebration();
       confetti({ particleCount: 100, spread: 70 });
     }
+
     setStep((prev) => prev + 1);
   };
 
@@ -42,6 +45,7 @@ function App() {
 
   return (
     <div className="app">
+      {/* Top Progress */}
       <div className="employer-line">
         <motion.div
           className="employer"
@@ -57,14 +61,16 @@ function App() {
         </div>
       </div>
 
+      {/* Main Step Content */}
       <div className="step-box">
         <h2>{steps[step]}</h2>
+
         {step === 2 && (
           <div className="choices">
             {evenChoices.map((num) => (
               <button
                 key={num}
-                className={\`choice \${evenAdd === num ? "selected" : ""}\`}
+                className={`choice ${evenAdd === num ? "selected" : ""}`}
                 onClick={() => setEvenAdd(num)}
               >
                 {num}
@@ -72,9 +78,11 @@ function App() {
             ))}
           </div>
         )}
+
         {step === 5 && finalNumber !== null && (
           <div className="reveal">🎉 Your final answer is: {finalNumber}</div>
         )}
+
         {step < steps.length - 1 ? (
           <button className="next-btn" onClick={handleNext}>
             Next ➡️
@@ -86,6 +94,7 @@ function App() {
         )}
       </div>
 
+      {/* Footer */}
       {step === 5 && (
         <motion.div
           className="footer-message"

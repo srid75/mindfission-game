@@ -222,7 +222,7 @@ function App() {
       return (
         <div className="game-complete">
           <h2>🎉 Your final answer is: {gameState.addedNumber / 2}</h2>
-          <p>Employee paid. Chaos avoided. Powered by Workfission.</p>
+          <p>Employee paid. Chaos avoided.</p>
           <button onClick={handlePlayAgain}>🔁 Play Again</button>
         </div>
       );
@@ -270,6 +270,9 @@ function App() {
         {renderGameContent()}
       </main>
       {gameState.showConfetti && <Confetti />}
+      <footer className="app-footer">
+        Powered by Workfission
+      </footer>
     </div>
   );
 }
