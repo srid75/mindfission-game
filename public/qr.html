@@ -35,6 +35,25 @@
             color: #4a5568;
             word-break: break-all;
             max-width: 300px;
+            margin-bottom: 1.5rem;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 1rem;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .download-btn:active {
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -43,9 +62,11 @@
         <h1>Mindfission Game</h1>
         <div id="qrcode"></div>
         <p class="url">https://srid75.github.io/mindfission-game</p>
+        <button class="download-btn" onclick="downloadQR()">Download QR Code</button>
     </div>
     <script>
-        new QRCode(document.getElementById("qrcode"), {
+        // Create QR Code
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
             text: "https://srid75.github.io/mindfission-game",
             width: 256,
             height: 256,
@@ -53,6 +74,22 @@
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
         });
+
+        // Function to download QR code
+        function downloadQR() {
+            // Get the QR code image
+            const img = document.querySelector('#qrcode img');
+            
+            // Create a temporary link
+            const link = document.createElement('a');
+            link.download = 'mindfission-game-qr.png';
+            link.href = img.src;
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     </script>
 </body>
 </html> 
